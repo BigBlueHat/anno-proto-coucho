@@ -1,0 +1,7 @@
+[
+  {
+    "---": "LDP Basic Container",
+    "from": "/",
+    "to": "/_list/basic-container/all"
+  }
+]
