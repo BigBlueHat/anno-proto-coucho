@@ -1,7 +1,14 @@
 [
   {
     "---": "LDP Basic Container",
+    "method": "GET",
     "from": "/",
     "to": "/_list/basic-container/all"
+  },
+  {
+    "---": "LDP Basic Container",
+    "method": "OPTIONS",
+    "from": "/",
+    "to": "/_show/OPTIONS"
   }
 ]
