@@ -1,4 +1,4 @@
-function(head, req){
+function(head, req) {
   start({
     'headers': {
       'Content-Type': 'text/turtle',
@@ -9,9 +9,9 @@ function(head, req){
     }
   });
 
-  send('@prefix ldp: <http://www.w3.org/ns/ldp#>.');
+  send('@prefix ldp: <http://www.w3.org/ns/ldp#>.' + "\n\n");
 
-  send('</' + req.info.db_name + '/> a ldp:BasicContainer;');
+  send('</' + req.info.db_name + '/> a ldp:BasicContainer;' + "\n");
   send('  ldp:contains');
   var ids = [];
   while (row = getRow()) {
