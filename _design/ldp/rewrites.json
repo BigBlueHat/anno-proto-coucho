@@ -10,5 +10,10 @@
     "method": "OPTIONS",
     "from": "/",
     "to": "/_show/OPTIONS"
+  },
+  {
+    "---": "LDP Resource",
+    "from": "/:doc",
+    "to": "../../:doc"
   }
 ]
