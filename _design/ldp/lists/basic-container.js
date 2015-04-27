@@ -3,8 +3,9 @@ function(head, req){
     'headers': {
       'Content-Type': 'text/turtle',
       'Accept-Post': 'text/turtle, application/ld+json',
-      'Link': '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type">',
-      'Link': '<http://www.w3.org/ns/ldp#Resource>; rel="type">'
+      'Link': '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"'
+            + "\n"
+            + '<http://www.w3.org/ns/ldp#Resource>; rel="type"'
     }
   });
 
