@@ -4,7 +4,7 @@ function(head, req) {
       'Content-Type': 'text/turtle',
       'Accept-Post': 'text/turtle, application/ld+json',
       'Link': '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"'
-            + "\n"
+            + ",\n "
             + '<http://www.w3.org/ns/ldp#Resource>; rel="type"'
     }
   });
