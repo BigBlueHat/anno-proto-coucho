@@ -9,6 +9,7 @@ LDP specific semantics.
 
 ## Usage
 
+0. `npm install && npm install -g gulp`
 1. Copy `config.json.sample` to `config.json`
 2. Change `config.json` to match your setup.
 3. `gulp` (or only `gulp apps` or `gulp docs`)
@@ -16,6 +17,17 @@ LDP specific semantics.
    plus `_design/ldp/_rewrite/`
 5. (optional) Setup a Virtual Host to make the URL above
    prettier.
+
+## Sample Requests
+
+Assuming your setup matches mine :smiley_cat:
+
+* http://localhost:5984/ldp-on-couchdb/_design/ldp/_rewrite/
+  * returns a Turtle representation of the Basic Container (which references
+  the documents contained in this container.
+* http://localhost:5984/ldp-on-couchdb/_design/ldp/_rewrite/a
+  * returns a JSON-LD representation of the `a` document + the
+  [Web Annotation Data Model JSON-LD Context](http://www.w3.org/TR/annotation-model/#json-ld-context).
 
 ## License
 
