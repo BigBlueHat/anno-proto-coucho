@@ -1,21 +1,49 @@
 function(head, req) {
-  start({
-    'headers': {
-      'Content-Type': 'text/turtle',
-      'Accept-Post': 'text/turtle, application/ld+json',
-      'Link': '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"'
-            + ",\n "
-            + '<http://www.w3.org/ns/ldp#Resource>; rel="type"'
-    }
-  });
+  var headers = {
+    'Accept-Post': 'text/turtle, application/ld+json',
+    'Link': '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"'
+          + ",\n "
+          + '<http://www.w3.org/ns/ldp#Resource>; rel="type"'
+  };
 
-  send('@prefix ldp: <http://www.w3.org/ns/ldp#>.' + "\n\n");
-
-  send('</' + req.info.db_name + '/> a ldp:BasicContainer;' + "\n");
-  send('  ldp:contains');
   var ids = [];
   while (row = getRow()) {
     ids.push(row.id);
   }
-  send(' <' + ids.join('>, <') + '>.');
+
+  // used for both JSON and JSON-LD
+  function theJSONs() {
+    start({headers: headers});
+    return toJSON({
+      "@context": "http://www.w3.org/ns/oa",
+      "@id": "http://example.org/annotations/",
+      "@type": "BasicContainer",
+      "label": "A Container for Open Annotations",
+      "alternate": [
+        "http://example.org/annotations2/",
+        "http://example.org/moreAnnotations/"
+      ],
+      "contains": ids
+    });
+  };
+
+  // JSON
+  provides('json', theJSONs);
+
+  // JSON-LD
+  registerType('json-ld', 'application/ld+json');
+  provides('json-ld', theJSONs);
+
+  // Turtle
+  registerType('turtle', 'text/turtle');
+  provides('turtle', function() {
+    start({headers: headers});
+
+    send('@prefix ldp: <http://www.w3.org/ns/ldp#>.' + "\n\n");
+
+    send('</' + req.info.db_name + '/> a ldp:BasicContainer;' + "\n");
+    send('  ldp:contains');
+    // output the ID's contained in this container
+    send(' <' + ids.join('>, <') + '>.');
+  });
 }
