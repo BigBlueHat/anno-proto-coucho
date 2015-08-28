@@ -3,7 +3,7 @@
     "---": "LDP Basic Container",
     "method": "GET",
     "from": "/",
-    "to": "/_list/basic-container/all"
+    "to": "/_list/basic_container/all"
   },
   {
     "---": "LDP Basic Container",
