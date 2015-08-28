@@ -12,7 +12,13 @@
     "to": "/_show/OPTIONS"
   },
   {
-    "---": "LDP Resource",
+    "---": "LDP Resource - DELETE",
+    "method": "DELETE",
+    "from": "/:doc",
+    "to": "../../:doc"
+  },
+  {
+    "---": "LDP Resource - GET, HEAD, OPTIONS",
     "from": "/:doc",
     "to": "/_show/add_context/:doc"
   }
