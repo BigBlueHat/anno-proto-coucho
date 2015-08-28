@@ -18,6 +18,12 @@
     "to": "../../:doc"
   },
   {
+    "---": "LDP Resource - PUT",
+    "method": "PUT",
+    "from": "/:doc",
+    "to": "../../:doc"
+  },
+  {
     "---": "LDP Resource - GET, HEAD, OPTIONS",
     "from": "/:doc",
     "to": "/_show/add_context/:doc"
