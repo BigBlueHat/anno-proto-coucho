@@ -15,14 +15,10 @@ function(head, req) {
   function theJSONs() {
     start({headers: headers});
     return toJSON({
-      "@context": "http://www.w3.org/ns/oa",
+      "@context": "http://www.w3.org/ns/anno.jsonld",
       "@id": "http://example.org/annotations/",
       "@type": "BasicContainer",
       "label": "A Container for Open Annotations",
-      "alternate": [
-        "http://example.org/annotations2/",
-        "http://example.org/moreAnnotations/"
-      ],
       "contains": ids
     });
   };
