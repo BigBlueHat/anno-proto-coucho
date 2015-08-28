@@ -12,6 +12,12 @@
     "to": "/_show/OPTIONS"
   },
   {
+    "---": "LDP Resource - POST",
+    "method": "POST",
+    "from": "/",
+    "to": "../../"
+  },
+  {
     "---": "LDP Resource - DELETE",
     "method": "DELETE",
     "from": "/:doc",
