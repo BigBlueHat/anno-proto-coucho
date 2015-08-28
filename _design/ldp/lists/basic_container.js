@@ -3,7 +3,9 @@ function(head, req) {
     'Accept-Post': 'text/turtle, application/ld+json',
     'Link': '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"'
           + ",\n "
-          + '<http://www.w3.org/ns/ldp#Resource>; rel="type"'
+          + '<http://www.w3.org/TR/annotation-protocol/constraints>; rel="http://www.w3.org/ns/ldp#constrainedBy"',
+    'Vary': 'Accept',
+    'Allow': 'GET, HEAD, OPTIONS, POST'
   };
 
   var ids = [];
