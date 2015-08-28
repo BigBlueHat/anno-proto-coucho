@@ -4,7 +4,7 @@ var fs = require('fs');
 
 var glob = require('glob');
 var gulp = require('gulp');
-var push = require('couch-push');
+var push = require('couchdb-push');
 var runSequence = require('run-sequence');
 var source = require('vinyl-source-stream');
 
