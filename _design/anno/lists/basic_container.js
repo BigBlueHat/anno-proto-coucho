@@ -15,7 +15,6 @@ function(head, req) {
           + '<http://www.w3.org/TR/annotation-protocol/constraints>; rel="http://www.w3.org/ns/ldp#constrainedBy"',
     'Vary': 'Accept',
     'Allow': 'GET, HEAD, OPTIONS, POST',
-    // TODO: make this actually correct when paging
     'Content-Location': container_path
   };
 
@@ -27,10 +26,10 @@ function(head, req) {
   // used for both JSON and JSON-LD
   function theJSONs(media_type) {
     headers['Content-Type'] = media_type || 'application/json';
-    start({headers: headers});
+    var rv = {}; // TODO: set this to an error a container with links?
     if (!('limit' in req.query) && !('show' in req.query)) {
       // we're not paginating atm, so return the container document
-      return toJSON({
+      rv = toJSON({
         "@context": [
           "http://www.w3.org/ns/anno.jsonld",
           "http://www.w3.org/ns/ldp.jsonld"
@@ -69,8 +68,13 @@ function(head, req) {
           + "?limit=" + page_size + "&skip="
           + ((Math.round(head.total_rows/10)*10) - page_size);
       }
-      return toJSON(page);
+
+      headers['Content-Location'] = page.id;
+      rv = toJSON(page);
     }
+
+    start({headers: headers});
+    return rv;
   }
 
   // JSON-LD
