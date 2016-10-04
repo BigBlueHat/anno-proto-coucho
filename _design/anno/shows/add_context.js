@@ -7,7 +7,8 @@ function(doc, req) {
   return {
     headers: {
       'Allow': 'GET, HEAD, OPTIONS, PUT, DELETE',
-      'Content-Type': 'application/ld+json;profile=
+      'Content-Type': 'application/ld+json;profile="http://www.w3.org/ns/anno.jsonld"',
+      'Link': '<http://www.w3.org/ns/ldp#Resource>; rel="type"'
     },
     body: JSON.stringify(rv, null, 2)
   };

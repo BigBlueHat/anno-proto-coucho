@@ -5,7 +5,9 @@ function(head, req) {
           + ",\n "
           + '<http://www.w3.org/TR/annotation-protocol/constraints>; rel="http://www.w3.org/ns/ldp#constrainedBy"',
     'Vary': 'Accept',
-    'Allow': 'GET, HEAD, OPTIONS, POST'
+    'Allow': 'GET, HEAD, OPTIONS, POST',
+    // TODO: make this actually correct...
+    'Content-Location': "http://example.org/annotations/"
   };
 
   var ids = [];
@@ -14,23 +16,31 @@ function(head, req) {
   }
 
   // used for both JSON and JSON-LD
-  function theJSONs() {
+  function theJSONs(media_type) {
+    headers['Content-Type'] = media_type || 'application/json';
     start({headers: headers});
     return toJSON({
-      "@context": "http://www.w3.org/ns/anno.jsonld",
-      "@id": "http://example.org/annotations/",
-      "@type": "BasicContainer",
-      "label": "A Container for Open Annotations",
-      "contains": ids
+      "@context": [
+        "http://www.w3.org/ns/anno.jsonld",
+        "http://www.w3.org/ns/ldp.jsonld"
+      ],
+      "id": "http://example.org/annotations/",
+      "type": ["BasicContainer", "AnnotationCollection"],
+      "label": "A Container for Web Annotations",
+      "first": {
+        "type": "AnnotationPage",
+        "items": ids
+      }
     });
   };
 
-  // JSON
-  provides('json', theJSONs);
-
   // JSON-LD
   registerType('json-ld', 'application/ld+json');
-  provides('json-ld', theJSONs);
+  provides('json-ld', theJSONs.bind(this,
+    'application/ld+json; profile="http://www.w3.org/ns/anno.jsonld"'));
+
+  // JSON
+  provides('json', theJSONs);
 
   // Turtle
   registerType('turtle', 'text/turtle');
