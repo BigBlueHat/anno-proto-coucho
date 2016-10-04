@@ -15,7 +15,7 @@
     "---": "LDP Resource - POST",
     "method": "POST",
     "from": "/",
-    "to": "../../"
+    "to": "/_update/annotation"
   },
   {
     "---": "LDP Resource - DELETE",
